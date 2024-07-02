@@ -1,2 +1,3 @@
 ipython==8.26.0
 pillow==10.4.0
+django-rest-marshmallow==4.0.2
