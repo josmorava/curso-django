@@ -9,22 +9,30 @@
   <div>
     <h2>Lista de productos</h2>
     <ul>
-      {% for product in product_list %}
+      {% for p in productos %}
         <li>
-          {{product.name}}
-          {{product.description}}
-          {{product.price}}
-          {{product.available}}
+          <p>{{ p.name }}</p>
+          <p>{{ p.description }}</p>
+          <p>Precio: ${{p.price}}</p>
         </li>
       {% endfor %}
     </ul>
+    
     ########################################
   </div>
   <br />
   <br />
   <div>
     <h2>Todos los productos</h2>
-    {{products}}
+    {{productos}}
+    ########################################
+    <br>
+    <h2>Product_List</h2>
+    {{products_list}}
+    ########################################
+    <br>
+    <h2>Products_name</h2>
+    {{products_name}}
   </div>
 
 </body>
