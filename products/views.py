@@ -17,7 +17,7 @@ class ProductFormView(generic.FormView):
     template_name = "products/add_products.html"
     form_class = ProductForm
     #reverse_lazy permite redirigir a una url
-    success_url = reverse_lazy('products_list')
+    success_url = reverse_lazy('list_product')
     
     
     def form_valid(self, form):
@@ -25,33 +25,19 @@ class ProductFormView(generic.FormView):
         return super().form_valid(form)
     
 
-# class ProductListView(TemplateView):
-#     template_name = "products/products_list.html"
-#     def get_context_data(self):
-#         products = Product.objects.all()
-        
-#         products_list = serializers.serialize("json", Product.objects.all(), fields=['name', 'description','price'])
-#         products_dict = json.loads(products_list)
-        
-#         print(type(products_list))
-#         products_name = products_dict['pk']
-        
-#         data = products_dict
-            
-#         return {
-#             "products_list": products_list,
-#             "products": data,
-#             "products_name": products_name
-#             # "products_list": products_list,
-#         }
+class ProductListView(generic.ListView):
+    model = Product
+    template_name = "products/products_list.html"
+    context_object_name = 'products'
 
-def ProductList(request):
-    products = Product.objects.all()
-    data = {
-        'productos': products
-    }
-    return render(
-        request,
-        'products/products_list.html',
-        data
-    )
+
+# def ProductList(request):
+#     products = Product.objects.all()
+#     data = {
+#         'productos': products
+#     }
+#     return render(
+#         request,
+#         'products/products_list.html',
+#         data
+#     )
