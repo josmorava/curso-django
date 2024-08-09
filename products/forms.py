@@ -10,6 +10,7 @@ class ProductForm(forms.Form):
     price = forms.DecimalField(max_digits=10, decimal_places=2, label="Precio")
     available = forms.BooleanField(initial=True, label="Disponible", required=True)
     photo = forms.ImageField(label="Foto", required=False)
+    date = forms.DateField(label="Fecha")
 
     def save(self):
         Product.objects.create(
@@ -18,4 +19,5 @@ class ProductForm(forms.Form):
             price=self.cleaned_data['price'],
             available=self.cleaned_data['available'],
             photo=self.cleaned_data['photo'],
+            date=self.cleaned_data['date']
         )
