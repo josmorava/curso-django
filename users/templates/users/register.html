@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load tailwind_filters %}
+
+{% block content %}
+<div class="flex flex-col px-6 py-8 mx-auto md:h-screen">
+    <div class="w-full flex justify-between p-6 rounded-lg bg-white border">
+      <h1 class="text-4xl tracking-wider font-semibold">Coffe Shop</h1>
+      <a 
+      class="group relative inline-block focus:outline-none focus:ring" 
+      href="{% url 'login'  %}"
+      >
+          <span
+          class="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-yellow-300 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"
+          ></span>
+          <span
+          class="relative inline-block border-2 border-current px-8 py-3 text-sm font-bold uppercase tracking-widest text-black group-active:text-opacity-75"
+          >
+          INICIAR SESIÓN
+          </span>
+      </a>
+    </div>
+
+    <div class="flex flex-col items-center justify-center my-auto w-full pt-4">
+      <div class="w-full rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 bg-white border border-gray-300">
+        <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+          <h1 class="text-2xl font-bold text-gray-900 sm:text-3xl">Registrarse</h1>
+          <form action="" method="post" class="my-8">
+              {% csrf_token %}
+              {{ form|crispy }}
+              
+              <button 
+                  class="group relative inline-block focus:outline-none focus:ring" 
+                  type="submit"
+              >
+                  <span
+                    class="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-yellow-300 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"
+                  ></span>
+                  <span
+                    class="relative inline-block border-2 border-current px-8 py-3 text-sm font-bold uppercase tracking-widest text-black group-active:text-opacity-75"
+                  >
+                    REGISTRARSE
+                  </span>
+              </button>
+          </form>
+          <p class="text-center text-base text-gray-800 mt-4">
+              Ya tienes una cuenta?
+              <a class="font-medium  hover:underline" href="{% url "login" %}">Inicia sesión</a>
+          </p>
+        </div>
+      </div>
+    </div>
+      
+</div>
+{% endblock content %}
