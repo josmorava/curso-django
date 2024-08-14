@@ -1,19 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>Aca aparecerá el form para agergar el producto</h1>
+{% extends "base.html" %}
+{% load tailwind_filters %}
 
-  <form action="{% url "add_product" %}" method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">
-      Agregar
-    </button>
-  </form>
-</body>
-</html>
+
+{% block content %}
+<section>
+    <div class="flex flex-col px-6 py-8 mx-auto md:h-screen">
+        <div class="w-full flex justify-between items-center p-6 rounded-lg bg-white border">
+            <h1 class="text-2xl md:text-4xl tracking-wider font-semibold">Coffe Shop</h1>
+            <div class="flex">
+                <a 
+                    class="group relative inline-block focus:outline-none focus:ring" 
+                    href="{% url 'list_product'  %}"
+                >
+                    <span
+                    class="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-blue-300 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"
+                    ></span>
+                    <span
+                    class="relative inline-block border-2 border-current px-8 py-3 text-sm font-bold uppercase tracking-widest text-black group-active:text-opacity-75"
+                    >
+                    VER LISTA DE PRODUCTOS
+                    </span>
+                </a>
+                
+                {% if user.is_authenticated %}
+                <div class="w-px mx-5 bg-gray-400"></div>
+                    <form action="{% url "logout" %}" method="post" class="flex">
+                        {% csrf_token %}
+                        <button 
+                            class="group relative inline-block focus:outline-none focus:ring" 
+                            type="submit"
+                            >
+                            <span
+                                class="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-yellow-300 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"
+                            ></span>
+                            <span
+                                class="relative inline-block border-2 border-current px-8 py-3 text-sm font-bold uppercase tracking-widest text-black group-active:text-opacity-75"
+                            >
+                                CERRAR SESIÓN
+                            </span>
+                        </button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+      
+        <div class="flex flex-col items-center justify-center my-auto w-full py-4">
+            <div class="w-full rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 bg-white border border-gray-300">
+                <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                    <h2 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+                        Agregar producto
+                    </h2>
+                    
+                    <form 
+                        class="max-w-lg mx-auto" 
+                        action="" 
+                        method="post"
+                        enctype="multipart/form-data"
+                    >
+                        {% csrf_token %}
+                        {{product_form|crispy}}
+                        {% comment %} {{product_form.as_p}} {% endcomment %}
+
+                        <button 
+                            class="group relative inline-block focus:outline-none focus:ring mt-8" 
+                            type="submit"
+                        >
+                            <span
+                            class="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-green-300 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"
+                            ></span>
+                            <span
+                            class="relative inline-block border-2 border-current px-8 py-3 text-sm font-bold uppercase tracking-widest text-black group-active:text-opacity-75"
+                            >
+                            AGREGAR PRODUCTO
+                            </span>
+                        </button>
+                    </form>        
+                </div>
+            </div>
+        </div>
+  </div>
+</section>
+{% endblock content %}
+
+
+  

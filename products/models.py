@@ -12,7 +12,7 @@ class Product(models.Model):
     description = models.TextField(max_length=300, verbose_name="Descripción")
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Precio")
     available = models.BooleanField(default=True, verbose_name="Disponible")
-    photo = models.ImageField(upload_to="logo", null=True, blank=True, verbose_name="Foto")
+    photo = models.ImageField(upload_to="images/", null=True, blank=True, verbose_name="Foto")
     
     def __str__(self):
         return f"{self.name}"
