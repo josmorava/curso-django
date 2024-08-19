@@ -24,6 +24,8 @@ class ProductFormView(generic.FormView):
         return super().form_valid(form)
 
 class ProductListView(generic.ListView):
+    paginate_by = 3 #3 productos por página
+    
     model = Product
     template_name = "products/products_list.html"
     context_object_name = 'products'
@@ -34,6 +36,7 @@ class ProductListView(generic.ListView):
 """     VISTAS BASADAS EN FUNCIONES     """
 def product_form_view(request):
     """Vista de formulario para agregar un producto"""
+    
     if request.method == 'POST':
         product_form = ProductForm(request.POST, request.FILES)
         if product_form.is_valid():
@@ -41,7 +44,6 @@ def product_form_view(request):
             return redirect('list_product')
     else:
         product_form = ProductForm()
-        
     data = {'product_form': product_form,}     
            
     return render (
@@ -53,12 +55,11 @@ def product_form_view(request):
     
 def product_list(request):
     """Vista de lista de productos"""
-    products_list = Product.objects.all()
     
-    p = Paginator(products_list, 3) 
+    products_list = Product.objects.all()
+    p = Paginator(products_list, 3) #3 productos por paǵina
     page_number = request.GET.get("page")
     product = p.get_page(page_number)
-    
     data = {
         # 'products': products_list,
         'product': product
